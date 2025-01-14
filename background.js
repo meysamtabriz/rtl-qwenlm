@@ -105,3 +105,4 @@ chrome.runtime.onInstalled.addListener(() => {
         }
     });
 });
+//create by diako :)
