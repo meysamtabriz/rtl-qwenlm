@@ -1,9 +1,6 @@
-// تابع برای چک کردن URL تب
 function isTargetURL(url) {
     return url && typeof url === 'string' && url.includes('chat.deepseek.com');
 }
-
-// مدیریت وضعیت isRTL
 const DirectionState = {
     get(callback) {
         chrome.storage.local.get(['isRTL'], (result) => {
@@ -14,16 +11,12 @@ const DirectionState = {
         chrome.storage.local.set({ isRTL });
     },
 };
-
-// تنظیم آیکون بر اساس وضعیت
 function updateIcon(isRTL) {
     const iconPath = isRTL
         ? { "16": "icons/icon_rtl16.png", "48": "icons/icon_rtl48.png", "128": "icons/icon_rtl128.png" }
         : { "16": "icons/icon_ltr16.png", "48": "icons/icon_ltr48.png", "128": "icons/icon_ltr128.png" };
     chrome.action.setIcon({ path: iconPath });
 }
-
-// اعمال جهت RTL یا LTR به DOM
 function setRTLDirection(isRTL) {
     document.documentElement.style.direction = isRTL ? 'rtl' : 'ltr';
     const codeBlocks = document.querySelectorAll('.md-code-block');
@@ -40,11 +33,9 @@ function setRTLDirection(isRTL) {
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
-    // ذخیره observer برای مدیریت‌های آتی
     window._rtlObserver = observer;
 }
 
-// توقف MutationObserver در صورت نیاز
 function stopObserver() {
     if (window._rtlObserver) {
         window._rtlObserver.disconnect();
@@ -52,7 +43,6 @@ function stopObserver() {
     }
 }
 
-// اعمال وضعیت ذخیره‌شده هنگام بارگذاری
 function applyStoredDirection(tab) {
     if (isTargetURL(tab.url)) {
         DirectionState.get((isRTL) => {
@@ -66,7 +56,6 @@ function applyStoredDirection(tab) {
     }
 }
 
-// مدیریت کلیک آیکون افزونه
 chrome.action.onClicked.addListener((tab) => {
     if (isTargetURL(tab.url)) {
         DirectionState.get((isRTL) => {
@@ -84,7 +73,6 @@ chrome.action.onClicked.addListener((tab) => {
     }
 });
 
-// مدیریت تغییر تب یا به‌روزرسانی تب
 function handleTabChange(tab) {
     if (isTargetURL(tab.url)) {
         applyStoredDirection(tab);
@@ -101,7 +89,6 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     }
 });
 
-// مدیریت تغییرات در storage
 chrome.storage.onChanged.addListener((changes, namespace) => {
     if (namespace === 'local' && changes.isRTL) {
         chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -111,11 +98,10 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     }
 });
 
-// تنظیم حالت پیش‌فرض RTL در زمان نصب افزونه
 chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.local.get(['isRTL'], (result) => {
-        if (result.isRTL === undefined) { // اگر مقدار isRTL تنظیم نشده باشد
-            chrome.storage.local.set({ isRTL: true }); // حالت پیش‌فرض RTL
+        if (result.isRTL === undefined) {
+            chrome.storage.local.set({ isRTL: true });
         }
     });
 });
