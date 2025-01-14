@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "RTL for Deepseek",
+  "version": "1.0",
+  "description": "Toggle RTL direction on chat.deepseek.com and change icon based on state.",
+  "permissions": ["storage", "scripting", "activeTab"],
+  "action": {
+    "default_icon": {
+      "16": "icons/icon_ltr16.png",
+      "48": "icons/icon_ltr48.png",
+      "128": "icons/icon_ltr128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "icons": {
+    "16": "icons/icon_ltr16.png",
+    "48": "icons/icon_ltr48.png",
+    "128": "icons/icon_ltr128.png"
+  }
+}
