@@ -1,5 +1,5 @@
 function isTargetURL(url) {
-    return url && typeof url === 'string' && url.includes('chat.deepseek.com');
+    return url && typeof url === 'string' && url.includes('chat.qwenlm.ai');
 }
 const DirectionState = {
     get(callback) {
@@ -69,7 +69,7 @@ chrome.action.onClicked.addListener((tab) => {
             updateIcon(newState);
         });
     } else {
-        chrome.tabs.update(tab.id, { url: 'https://chat.deepseek.com' });
+        chrome.tabs.update(tab.id, { url: 'https://chat.qwenlm.ai/' });
     }
 });
 
