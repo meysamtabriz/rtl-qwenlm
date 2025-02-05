@@ -106,3 +106,4 @@ chrome.runtime.onInstalled.addListener(() => {
     });
 });
 //create by diako :)
+//Optimized for QwenLM by MeysamTabriz
