@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "RTL for Deepseek",
+  "name": "RTL for QwenLM",
   "version": "1.0",
-  "description": "Toggle RTL direction on chat.deepseek.com and change icon based on state.",
+  "description": "Toggle RTL direction on chat.qwenlm.ai and change icon based on state.",
   "permissions": ["storage", "scripting", "activeTab"],
   "action": {
     "default_icon": {
